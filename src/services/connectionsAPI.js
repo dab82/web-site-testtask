@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { func } from 'prop-types';
 
 import { baseURL } from '../libs/constants';
 
@@ -14,13 +13,6 @@ export const token = {
   },
 };
 
-export async function fetchGoogleAuth() {
-  const data = await axios
-    .get('/users/google')
-    .then(res => res.data);
-  return data;
-}
-
 export async function fetchRegister(userData) {
   const data = await axios
     .post('/users/register', userData)
@@ -29,23 +21,17 @@ export async function fetchRegister(userData) {
 }
 
 export async function fetchLogIn(userData) {
-  const data = await axios
-    .post('/users/login', userData)
-    .then(res => res.data);
+  const data = await axios.post('/users/login', userData).then(res => res.data);
   return data;
 }
 
 export async function fetchLogOut() {
-  const data = await axios
-    .post('/users/logout')
-    .then(res => res.data);
+  const data = await axios.post('/users/logout').then(res => res.data);
   return data;
 }
 
 export async function fetchUsers() {
-  const data = await axios
-    .get('/users/current')
-    .then(res => res.data);
+  const data = await axios.get('/users/current').then(res => res.data);
   return data;
 }
 
@@ -57,9 +43,7 @@ export async function fetchUserData(calculatorData) {
 }
 
 export async function getInfoByDate(date) {
-  const data = await axios
-    .get(`/days/${date}`)
-    .then(res => res.data);
+  const data = await axios.get(`/days/${date}`).then(res => res.data);
 
   return data;
 }

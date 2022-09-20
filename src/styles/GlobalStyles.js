@@ -36,6 +36,7 @@ export const GlobalStyles = theme => css`
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    background-color: ${theme.backgrounds.grey};
   }
 
   h1,

@@ -1,7 +1,16 @@
-import React from 'react';
+import { CustomButton } from './Button.styled';
 
-const Button = () => {
-  return <div>Button</div>;
+const YellowButton = ({ type, onClick, children, style, disabled }) => {
+  return (
+    <CustomButton
+      style={style}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
+    </CustomButton>
+  );
 };
 
-export default Button;
+export default YellowButton;

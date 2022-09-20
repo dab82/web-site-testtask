@@ -19,7 +19,7 @@ export function mediaDesktop(content) {
 }
 
 export function mediaQHD(content) {
-  return `@media screen and (min-width: ${breakPoints.DESK}px) {
+  return `@media screen and (min-width: ${breakPoints.QHD}px) {
     ${content}
   }`;
 }

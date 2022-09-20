@@ -10,13 +10,13 @@ export const Theme = createTheme({
     yellow: '#F4E041',
     blue: '#00BDD3',
     grey: '#F8F8F8',
+    disabled: '#B4B4B4',
     loader: '#FC842D',
     backdrop: 'rgba(0, 0, 0, 0.4)',
-    // userInfo: '#EFF1F3',
     userBack: 'transparent',
     modalOverlay: 'rgba(33, 33, 33, 0.12)',
   },
-  hovers: {
+  hover: {
     yellow: '#FFE302',
   },
   transitions: {
