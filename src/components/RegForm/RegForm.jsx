@@ -7,7 +7,7 @@ import {
   InputUserInfo,
   CheckBox,
 } from './RegForm.styled';
-import { Button, RadioGroup, FormControlLabel } from '@mui/material';
+import { RadioGroup, FormControlLabel } from '@mui/material';
 
 import { schemaSignUp } from 'utils/validationSchema';
 import { Container } from 'components/Container/Container';
