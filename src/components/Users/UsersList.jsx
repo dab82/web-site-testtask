@@ -1,14 +1,10 @@
 import { Container } from 'components/Container/Container';
 import UserCard from './UserCard';
-import { UsersListBox, UserListTitile } from './Users.styled';
 import YellowButton from 'components/Button/Button';
 
-const UsersList = ({
-  usersList,
-  currentPage,
-  totalPages,
-  handleLoadMoreClick,
-}) => {
+import { UsersListBox, UserListTitile } from './Users.styled';
+
+const UsersList = ({ usersList, currentPage, totalPages, handleShowMore }) => {
   return (
     <Container>
       <UserListTitile id="users-list">Working with GET request</UserListTitile>
@@ -29,7 +25,7 @@ const UsersList = ({
           style={{ width: 120, margin: '0 auto 140px auto' }}
           type="button"
           children={'Show more'}
-          onClick={handleLoadMoreClick}
+          onClick={handleShowMore}
         />
       )}
     </Container>

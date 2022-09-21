@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
-import { mediaTablet, mediaDesktop } from '../../utils/media';
+import { mediaTablet, mediaDesktop } from 'utils';
 import Hero from '../../assets/img/pexels-alexandr-podvalny-1227513.webp';
 
 export const MainHero = styled.div`

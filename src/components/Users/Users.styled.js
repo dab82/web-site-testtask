@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Typography, Card, Avatar, Box } from '@mui/material';
-import { mediaTablet, mediaDesktop, mediaMaxPhone } from '../../utils/media';
+import { mediaTablet, mediaDesktop, mediaMaxPhone } from 'utils';
 
 export const UsersListBox = styled(Box)`
   margin-bottom: 50px;

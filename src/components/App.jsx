@@ -7,9 +7,10 @@ import Header from './Header/Header';
 import Hero from './Hero/Hero';
 import UsersList from './Users/UsersList';
 import RegForm from './RegForm/RegForm';
+import SuccessBlock from './SuccsessBlock/SuccessBlock';
+import { ScrollTop } from './ScrollTop/ScrollTop';
 import { getUsers } from 'services/usersAPI';
 import Preloader from './Preloader/Preloader';
-import { ScrollTop } from './ScrollTop/ScrollTop';
 
 export const App = () => {
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
@@ -31,7 +32,7 @@ export const App = () => {
       });
   }, [successfulSubmit]);
 
-  const handleLoadMoreClick = () => {
+  const handleShowMore = () => {
     setIsLoading(true);
     const nextPage = currentPage + 1;
     getUsers(nextPage)
@@ -57,14 +58,18 @@ export const App = () => {
           usersList={usersList}
           totalPages={totalPages}
           currentPage={currentPage}
-          handleLoadMoreClick={handleLoadMoreClick}
+          handleShowMore={handleShowMore}
         />
       )}
-      <RegForm
-        setSuccessfulSubmit={setSuccessfulSubmit}
-        successfulSubmit={successfulSubmit}
-        setIsLoading={setIsLoading}
-      />
+      {successfulSubmit ? (
+        <SuccessBlock />
+      ) : (
+        <RegForm
+          setSuccessfulSubmit={setSuccessfulSubmit}
+          successfulSubmit={successfulSubmit}
+          setIsLoading={setIsLoading}
+        />
+      )}
       <ScrollTop showBelow={200} />
     </ThemeProvider>
   );

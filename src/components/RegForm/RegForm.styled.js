@@ -7,7 +7,7 @@ import {
   ButtonBase,
   FormControlLabel,
 } from '@mui/material';
-import { mediaTablet } from '../../utils/media';
+import { mediaTablet } from 'utils';
 
 export const SignupForm = styled(Box)`
   display: flex;
@@ -24,6 +24,7 @@ export const FormTitile = styled(Typography)`
 
 export const FormWrapper = styled(Box)`
   margin-bottom: 100px;
+  width: 100%;
   ${mediaTablet(` width: 380px;`)};
 `;
 
@@ -31,7 +32,8 @@ export const InputUserInfo = styled(TextField)`
   height: 56px;
   margin-top: 50px;
   input,
-  label {
+  label,
+  p {
     font-family: 'Nunito';
   }
 `;
@@ -48,7 +50,7 @@ export const CheckBox = styled(Radio)`
 export const UploadButton = styled(ButtonBase)`
   height: 104%;
   padding: 14px 15px;
-  border: 1px solid rgba(0, 0, 0, 0.87);
+  border: solid;
   border-radius: 4px 0px 0px 4px;
   color: ${props => props.theme.fontColors.primary};
   cursor: pointer;
@@ -59,7 +61,6 @@ export const UploadButton = styled(ButtonBase)`
   }
 `;
 export const UploadInput = styled.div`
-  width: 100%;
   padding: 14px 16px;
   color: ${props => props.theme.fontColors.primary};
   white-space: nowrap;
@@ -78,10 +79,20 @@ export const UploadPlaceholder = styled(Typography)`
 export const UploadWrapper = styled(Box)`
   display: flex;
   align-items: center;
-  width: 100%;
   height: 54px;
   margin-top: 47px;
   margin-bottom: 50px;
-  border: 1px solid #d0cfcf;
+
+  border: solid;
   border-radius: 4px;
+  position: relative;
+`;
+
+export const UploadError = styled.span`
+  position: absolute;
+  top: 100%;
+  margin-left: 14px;
+  margin-top: 4px;
+  color: #d32f2f;
+  font-size: 0.75rem;
 `;

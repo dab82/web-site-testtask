@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-
-import { mediaTablet, mediaDesktop, mediaQHD } from '../../utils/media';
+import { mediaTablet, mediaDesktop, mediaQHD } from 'utils';
 
 export const ContainerBody = styled.div`
   max-width: 360px;

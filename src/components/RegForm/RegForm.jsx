@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useFormik } from 'formik';
 import {
   FormTitile,
@@ -11,25 +10,15 @@ import {
   UploadButton,
   UploadPlaceholder,
   CheckBoxLabel,
+  UploadError,
 } from './RegForm.styled';
 import { RadioGroup } from '@mui/material';
-import { schemaSignUp } from 'utils/validationSchema';
+import { schemaSignUp, userData } from 'utils';
 import { Container } from 'components/Container/Container';
 import YellowButton from 'components/Button/Button';
 import { postUser } from 'services/usersAPI';
-import SuccessModal from 'components/SuccsessModal/SuccessModal';
 
 const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
-  const [openModal, setOpenModal] = useState(false);
-
-  const userData = values => {
-    let formData = new FormData();
-    Object.keys(values).forEach(key => {
-      formData.append(key, values[key]);
-    });
-    return formData;
-  };
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -39,8 +28,7 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
       photo: null,
     },
     validationSchema: schemaSignUp,
-    onSubmit: async ({ values }, { setSubmitting }) => {
-      setIsLoading(true);
+    onSubmit: async (values, { setSubmitting }) => {
       const data = userData(values);
       try {
         await postUser(data);
@@ -50,13 +38,9 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
       setSuccessfulSubmit(true);
       setIsLoading(false);
       setSubmitting(false);
-      setOpenModal(true);
     },
   });
 
-  const handleClose = () => {
-    setOpenModal(false);
-  };
   const fileName = !formik.values.photo ? null : formik.values.photo?.name;
 
   return (
@@ -150,10 +134,24 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
               label="QA"
             />
           </RadioGroup>
-          <UploadWrapper>
-            <UploadButton component="label">
+          <UploadWrapper
+            style={{
+              borderWidth: formik.errors.photo ? 2 : 1,
+              borderColor: formik.errors.photo ? '#d32f2f' : '#d0cfcf',
+            }}
+          >
+            <UploadButton
+              component="label"
+              style={{
+                borderWidth: formik.errors.photo ? 2 : 1,
+                borderColor: formik.errors.photo
+                  ? '#d32f2f'
+                  : 'rgba(0, 0, 0, 0.87)',
+              }}
+            >
               Upload
               <input
+                hidden
                 name="photo"
                 id="photo"
                 type="file"
@@ -161,9 +159,6 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
                 onChange={event => {
                   formik.setFieldValue('photo', event.currentTarget.files[0]);
                 }}
-                hidden
-
-                // error={formik.touched.photo && Boolean(formik.errors.photo)}
               />
             </UploadButton>
             <UploadInput>
@@ -173,6 +168,9 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
                 fileName
               )}
             </UploadInput>
+            {formik.errors.photo && (
+              <UploadError>{formik.errors.photo} </UploadError>
+            )}
           </UploadWrapper>
           <YellowButton
             type="submit"
@@ -182,7 +180,6 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
           />
         </FormWrapper>
       </SignupForm>
-      <SuccessModal openModal={openModal} handleClose={handleClose} />
     </Container>
   );
 };

@@ -1,6 +1,6 @@
-import Logo from '../../assets/img/Logo.svg';
-import YellowButton from 'components/Button/Button';
 import AnchorLink from 'react-anchor-link-smooth-scroll-v2';
+import YellowButton from 'components/Button/Button';
+import Logo from '../../assets/img/Logo.svg';
 import { MainHeader, HeaderWrapper, NavBtnWrapper } from './Header.styled';
 
 const Header = () => {

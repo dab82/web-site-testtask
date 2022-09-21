@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { AppBar, Box } from '@mui/material';
-import { mediaTablet, mediaDesktop, mediaMaxHD } from '../../utils/media';
+import { mediaTablet, mediaDesktop, mediaMaxHD } from 'utils';
 
 export const MainHeader = styled(AppBar)`
   position: static;
