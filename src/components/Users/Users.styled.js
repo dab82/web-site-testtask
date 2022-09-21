@@ -43,7 +43,6 @@ export const UserAvatar = styled(Avatar)`
 export const UserName = styled(Typography)`
   margin-bottom: 20px;
   font-family: 'Nunito';
-  text-overflow: ellipsis;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -51,6 +50,7 @@ export const UserName = styled(Typography)`
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
   cursor: pointer;
 `;
 

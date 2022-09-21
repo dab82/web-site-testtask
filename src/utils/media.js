@@ -29,3 +29,9 @@ export function mediaMaxPhone(content) {
     ${content}
   }`;
 }
+
+export function mediaMaxHD(content) {
+  return `@media screen and (min-width: ${breakPoints.MaxHD}px) {
+    ${content}
+  }`;
+}

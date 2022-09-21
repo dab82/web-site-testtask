@@ -1,10 +1,15 @@
 import { createTheme } from '@mui/material/styles';
 
 export const Theme = createTheme({
-  palette: { mode: 'light' },
+  palette: {
+    primary: {
+      main: '#00BDD3',
+    },
+  },
   fontColors: {
     primary: 'rgba(0, 0, 0, 0.87)',
     secondary: '#FFFFFF',
+    placeholder: '#7E7E7E',
   },
   backgrounds: {
     yellow: '#F4E041',
@@ -14,7 +19,7 @@ export const Theme = createTheme({
     loader: '#FC842D',
     backdrop: 'rgba(0, 0, 0, 0.4)',
     userBack: 'transparent',
-    modalOverlay: 'rgba(33, 33, 33, 0.12)',
+    modal: '#FFFFFF',
   },
   hover: {
     yellow: '#FFE302',

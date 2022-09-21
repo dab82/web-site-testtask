@@ -6,9 +6,13 @@ import {
   FormWrapper,
   InputUserInfo,
   CheckBox,
+  UploadWrapper,
+  UploadInput,
+  UploadButton,
+  UploadPlaceholder,
+  CheckBoxLabel,
 } from './RegForm.styled';
-import { RadioGroup, FormControlLabel } from '@mui/material';
-
+import { RadioGroup } from '@mui/material';
 import { schemaSignUp } from 'utils/validationSchema';
 import { Container } from 'components/Container/Container';
 import YellowButton from 'components/Button/Button';
@@ -16,9 +20,9 @@ import { postUser } from 'services/usersAPI';
 import SuccessModal from 'components/SuccsessModal/SuccessModal';
 
 const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const rebuildData = values => {
+  const userData = values => {
     let formData = new FormData();
     Object.keys(values).forEach(key => {
       formData.append(key, values[key]);
@@ -31,14 +35,13 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
       name: '',
       email: '',
       phone: '',
-      position_id: 0,
+      position_id: 1,
       photo: null,
     },
     validationSchema: schemaSignUp,
     onSubmit: async ({ values }, { setSubmitting }) => {
       setIsLoading(true);
-      const data = rebuildData(values);
-
+      const data = userData(values);
       try {
         await postUser(data);
       } catch (error) {
@@ -47,17 +50,14 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
       setSuccessfulSubmit(true);
       setIsLoading(false);
       setSubmitting(false);
-      setOpen(true);
+      setOpenModal(true);
     },
   });
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    setOpenModal(false);
   };
+  const fileName = !formik.values.photo ? null : formik.values.photo?.name;
 
   return (
     <Container>
@@ -67,8 +67,7 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
           noValidate
           component="form"
           autoComplete="off"
-          onSubmit={handleOpen}
-          // onSubmit={formik.handleSubmit}
+          onSubmit={formik.handleSubmit}
         >
           <InputUserInfo
             name="name"
@@ -81,7 +80,6 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
           />
-
           <InputUserInfo
             fullWidth
             id="email"
@@ -94,7 +92,6 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
-
           <InputUserInfo
             fullWidth
             name="phone"
@@ -110,42 +107,42 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
                 : '+38 (XXX) XXX - XX - XX'
             }
           />
-
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue={1}
             name="radio-buttons-group"
+            sx={{ my: '45px' }}
           >
-            <FormControlLabel
+            <CheckBoxLabel
               name="position_id"
-              id="position_id"
+              id="Frontend developer"
               value={1}
               onClick={formik.handleChange}
               onBlur={formik.handleBlur}
               control={<CheckBox />}
               label="Frontend developer"
             />
-            <FormControlLabel
+            <CheckBoxLabel
               name="position_id"
-              id="position_id"
+              id="Backend developer"
               value={2}
               onClick={formik.handleChange}
               onBlur={formik.handleBlur}
               control={<CheckBox />}
               label="Backend developer"
             />
-            <FormControlLabel
+            <CheckBoxLabel
               name="position_id"
-              id="position_id"
+              id="Designer"
               value={3}
               onClick={formik.handleChange}
               onBlur={formik.handleBlur}
               control={<CheckBox />}
               label="Designer"
             />
-            <FormControlLabel
+            <CheckBoxLabel
               name="position_id"
-              id="position_id"
+              id="QA"
               value={4}
               onClick={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -153,11 +150,30 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
               label="QA"
             />
           </RadioGroup>
+          <UploadWrapper>
+            <UploadButton component="label">
+              Upload
+              <input
+                name="photo"
+                id="photo"
+                type="file"
+                accept=".jpg, .jpeg"
+                onChange={event => {
+                  formik.setFieldValue('photo', event.currentTarget.files[0]);
+                }}
+                hidden
 
-          {/* <Button variant="contained" component="label">
-            <input type="file" placeholder="xxx" />
-          </Button> */}
-
+                // error={formik.touched.photo && Boolean(formik.errors.photo)}
+              />
+            </UploadButton>
+            <UploadInput>
+              {!fileName ? (
+                <UploadPlaceholder children="Upload your photo" />
+              ) : (
+                fileName
+              )}
+            </UploadInput>
+          </UploadWrapper>
           <YellowButton
             type="submit"
             disabled={!(formik.isValid && formik.dirty)}
@@ -166,7 +182,7 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
           />
         </FormWrapper>
       </SignupForm>
-      <SuccessModal open={open} handleClose={handleClose} />
+      <SuccessModal openModal={openModal} handleClose={handleClose} />
     </Container>
   );
 };

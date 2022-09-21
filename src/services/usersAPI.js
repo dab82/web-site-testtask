@@ -6,7 +6,6 @@ axios.defaults.baseURL = baseURL;
 export const getUsers = (page = 1) =>
   axios
     .get(`/users?page=${page}&count=6`)
-
     .then(({ data }) => ({
       total_pages: data.total_pages,
       users: data.users,

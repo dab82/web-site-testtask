@@ -36,7 +36,7 @@ export const App = () => {
     const nextPage = currentPage + 1;
     getUsers(nextPage)
       .then(({ users, total_pages, page }) => {
-        setUsersList([...usersList, ...users]);
+        setUsersList(users);
         setTotalPages(total_pages);
         setCurrentPage(page);
       })

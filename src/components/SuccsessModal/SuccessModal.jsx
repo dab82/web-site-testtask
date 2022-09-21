@@ -1,33 +1,15 @@
-import { Modal, Box, Typography } from '@mui/material';
+import { Modal } from '@mui/material';
+import { ModalWrapper, ModalTitile, ModalImg } from './SuccessModal.styled';
 import Successful from '../../assets/img/success-image.svg';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  //   width: 400,
-  bgcolor: 'background.paper',
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 10,
-};
-
-const SuccessModal = ({ open, handleClose }) => {
+const SuccessModal = ({ openModal, handleClose }) => {
   return (
     <>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-description" variant="h4" sx={{ mb: 4 }}>
-            User successfully registered
-          </Typography>
-          <img alt="success" src={Successful} />
-        </Box>
+      <Modal open={openModal} onClose={handleClose}>
+        <ModalWrapper>
+          <ModalTitile>User successfully registered</ModalTitile>
+          <ModalImg alt="success" src={Successful} />
+        </ModalWrapper>
       </Modal>
     </>
   );
