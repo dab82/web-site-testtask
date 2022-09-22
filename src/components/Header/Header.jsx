@@ -7,12 +7,7 @@ const Header = () => {
   return (
     <MainHeader>
       <HeaderWrapper>
-        <img
-          alt="Logo"
-          src={Logo}
-          variant="rounded"
-          sx={{ width: '104px', height: '26px' }}
-        />
+        <img alt="Logo" src={Logo} style={{ width: '104px', height: '26px' }} />
         <NavBtnWrapper>
           <AnchorLink href="#users-list">
             <YellowButton type="button" children={'Users'} />

@@ -137,13 +137,12 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
           <UploadWrapper
             style={{
               borderWidth: formik.errors.photo ? 2 : 1,
-              borderColor: formik.errors.photo ? '#d32f2f' : '#d0cfcf',
+              borderColor: formik.errors.photo ? '#d32f2f' : '#B4B4B4',
             }}
           >
             <UploadButton
               component="label"
               style={{
-                borderWidth: formik.errors.photo ? 2 : 1,
                 borderColor: formik.errors.photo
                   ? '#d32f2f'
                   : 'rgba(0, 0, 0, 0.87)',

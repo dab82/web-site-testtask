@@ -12,7 +12,7 @@ const UserCard = ({ name, photo, position, email, phone }) => {
     <MainUserCard>
       <>
         <Tooltip title={name} placement="bottom-end">
-          <UserAvatar alt={name} src={photo} />
+          <UserAvatar alt={name} src={photo} imgProps={{ loading: 'lazy' }} />
         </Tooltip>
         <Tooltip title={name} placement="bottom-end">
           <UserName>{name}</UserName>

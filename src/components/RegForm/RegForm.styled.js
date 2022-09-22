@@ -50,7 +50,7 @@ export const CheckBox = styled(Radio)`
 export const UploadButton = styled(ButtonBase)`
   height: 104%;
   padding: 14px 15px;
-  border: solid;
+  border: 1px solid;
   border-radius: 4px 0px 0px 4px;
   color: ${props => props.theme.fontColors.primary};
   cursor: pointer;

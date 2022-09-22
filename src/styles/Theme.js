@@ -9,7 +9,7 @@ export const Theme = createTheme({
   fontColors: {
     primary: 'rgba(0, 0, 0, 0.87)',
     secondary: '#FFFFFF',
-    placeholder: '#7E7E7E',
+    placeholder: '#B4B4B4',
   },
   backgrounds: {
     yellow: '#F4E041',
