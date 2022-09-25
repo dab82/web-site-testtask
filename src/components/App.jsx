@@ -9,7 +9,7 @@ import UsersList from './Users/UsersList';
 import RegForm from './RegForm/RegForm';
 import SuccessBlock from './SuccsessBlock/SuccessBlock';
 import { ScrollTop } from './ScrollTop/ScrollTop';
-import { getUsers } from 'services/usersAPI';
+import { getPosition, getUsers } from 'services/usersAPI';
 import Preloader from './Preloader/Preloader';
 
 export const App = () => {
@@ -17,7 +17,17 @@ export const App = () => {
   const [usersList, setUsersList] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [positions, setPositions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getPosition()
+      .then(res => setPositions(res.data.positions))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -66,8 +76,9 @@ export const App = () => {
       ) : (
         <RegForm
           setSuccessfulSubmit={setSuccessfulSubmit}
-          successfulSubmit={successfulSubmit}
           setIsLoading={setIsLoading}
+          isLogading
+          positions={positions}
         />
       )}
       <ScrollTop showBelow={200} />

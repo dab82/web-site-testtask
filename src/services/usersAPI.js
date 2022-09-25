@@ -21,3 +21,7 @@ export const postUser = async formData => {
 
   axios.post('/users', formData, config).catch(console.error);
 };
+
+export const getPosition = () => {
+  return axios.get('/positions');
+};
