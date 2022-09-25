@@ -1,16 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { Global } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Theme } from '../styles/Theme';
 import { GlobalStyles } from '../styles/GlobalStyles';
-import Header from './Header/Header';
-import Hero from './Hero/Hero';
-import UsersList from './Users/UsersList';
-import RegForm from './RegForm/RegForm';
-import SuccessBlock from './SuccsessBlock/SuccessBlock';
+// // import Header from './Header/Header';
+// import Hero from './Hero/Hero';
+// import UsersList from './Users/UsersList';
+// import RegForm from './RegForm/RegForm';
+// import SuccessBlock from './SuccsessBlock/SuccessBlock';
 import { ScrollTop } from './ScrollTop/ScrollTop';
 import { getPosition, getUsers } from 'services/usersAPI';
 import Preloader from './Preloader/Preloader';
+
+const Header = lazy(() => import('../components/Header/Header'));
+const Hero = lazy(() => import('../components/Hero/Hero'));
+const UsersList = lazy(() => import('../components/Users/UsersList'));
+const RegForm = lazy(() => import('../components/RegForm/RegForm'));
+const SuccessBlock = lazy(() =>
+  import('../components/SuccsessBlock/SuccessBlock')
+);
 
 export const App = () => {
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
