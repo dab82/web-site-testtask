@@ -3,7 +3,7 @@ import {
   emailRegExp,
   phoneRegExp,
   SUPPORTED_FORMATS,
-  MAX_FILE_SIZE,
+  FILE_SIZE,
 } from './constants';
 
 export const schemaSignUp = yup.object().shape({
@@ -27,14 +27,20 @@ export const schemaSignUp = yup.object().shape({
 
   photo: yup
     .mixed()
-    .required()
+    .notRequired()
     .test(
-      'fileSize',
+      'FILE_SIZE',
       `File too big, can't exceed 5 Mb`,
-      value => value.size <= MAX_FILE_SIZE
+      value => !value || (value && value.size <= FILE_SIZE)
     )
-    .test('photo size', 'must be min 70X70', value => value.size >= 70 * 70)
-    .test('fileType', `must be ${SUPPORTED_FORMATS}`, value =>
-      SUPPORTED_FORMATS.includes(value.type)
+    .test(
+      'photo size',
+      'must be min 70X70',
+      value => !value || (value && value.size >= 70 * 70)
+    )
+    .test(
+      'fileType',
+      `must be ${SUPPORTED_FORMATS}`,
+      value => !value || (value && SUPPORTED_FORMATS.includes(value.type))
     ),
 });

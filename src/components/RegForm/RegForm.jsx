@@ -17,14 +17,20 @@ import { schemaSignUp, userData } from 'utils';
 import { Container } from 'components/Container/Container';
 import YellowButton from 'components/Button/Button';
 import { postUser } from 'services/usersAPI';
+import Preloader from 'components/Preloader/Preloader';
 
-const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
+const RegForm = ({
+  setSuccessfulSubmit,
+  setIsLoading,
+  isLogading,
+  positions,
+}) => {
   const formik = useFormik({
     initialValues: {
       name: '',
       email: '',
       phone: '',
-      position_id: 1,
+      position_id: 0,
       photo: null,
     },
     validationSchema: schemaSignUp,
@@ -52,6 +58,7 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
           component="form"
           autoComplete="off"
           onSubmit={formik.handleSubmit}
+          encType="multipart/form-data"
         >
           <InputUserInfo
             name="name"
@@ -91,49 +98,30 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
                 : '+38 (XXX) XXX - XX - XX'
             }
           />
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={1}
-            name="radio-buttons-group"
-            sx={{ my: '45px' }}
-          >
-            <CheckBoxLabel
-              name="position_id"
-              id="Frontend developer"
-              value={1}
-              onClick={formik.handleChange}
-              onBlur={formik.handleBlur}
-              control={<CheckBox />}
-              label="Frontend developer"
-            />
-            <CheckBoxLabel
-              name="position_id"
-              id="Backend developer"
-              value={2}
-              onClick={formik.handleChange}
-              onBlur={formik.handleBlur}
-              control={<CheckBox />}
-              label="Backend developer"
-            />
-            <CheckBoxLabel
-              name="position_id"
-              id="Designer"
-              value={3}
-              onClick={formik.handleChange}
-              onBlur={formik.handleBlur}
-              control={<CheckBox />}
-              label="Designer"
-            />
-            <CheckBoxLabel
-              name="position_id"
-              id="QA"
-              value={4}
-              onClick={formik.handleChange}
-              onBlur={formik.handleBlur}
-              control={<CheckBox />}
-              label="QA"
-            />
-          </RadioGroup>
+          {!isLogading ? (
+            <Preloader />
+          ) : (
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue={1}
+              name="radio-buttons-group"
+              sx={{ my: '45px' }}
+            >
+              {positions &&
+                positions.map(({ name, id }) => (
+                  <CheckBoxLabel
+                    key={id}
+                    name="position_id"
+                    id={name}
+                    value={id}
+                    onClick={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    control={<CheckBox />}
+                    label={name}
+                  />
+                ))}
+            </RadioGroup>
+          )}
           <UploadWrapper
             style={{
               borderWidth: formik.errors.photo ? 2 : 1,
@@ -155,8 +143,8 @@ const RegForm = ({ setSuccessfulSubmit, setIsLoading }) => {
                 id="photo"
                 type="file"
                 accept=".jpg, .jpeg"
-                onChange={event => {
-                  formik.setFieldValue('photo', event.currentTarget.files[0]);
+                onChange={e => {
+                  formik.setFieldValue('photo', e.currentTarget.files[0]);
                 }}
               />
             </UploadButton>

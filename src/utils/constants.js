@@ -15,4 +15,4 @@ export const phoneRegExp = /^[+]{0,1}380([0-9]{9})$/;
 
 export const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg'];
 
-export const MAX_FILE_SIZE = 5000000;
+export const FILE_SIZE = 5000000;
