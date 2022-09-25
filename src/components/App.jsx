@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Global } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Theme } from '../styles/Theme';
@@ -67,29 +67,31 @@ export const App = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Global styles={GlobalStyles} />
-      <Header />
-      <Hero />
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <UsersList
-          usersList={usersList}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          handleShowMore={handleShowMore}
-        />
-      )}
-      {successfulSubmit ? (
-        <SuccessBlock />
-      ) : (
-        <RegForm
-          setSuccessfulSubmit={setSuccessfulSubmit}
-          setIsLoading={setIsLoading}
-          isLogading
-          positions={positions}
-        />
-      )}
-      <ScrollTop showBelow={200} />
+      <Suspense fallback={<Preloader />}>
+        <Header />
+        <Hero />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <UsersList
+            usersList={usersList}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handleShowMore={handleShowMore}
+          />
+        )}
+        {successfulSubmit ? (
+          <SuccessBlock />
+        ) : (
+          <RegForm
+            setSuccessfulSubmit={setSuccessfulSubmit}
+            setIsLoading={setIsLoading}
+            isLogading
+            positions={positions}
+          />
+        )}
+        <ScrollTop showBelow={200} />
+      </Suspense>
     </ThemeProvider>
   );
 };
