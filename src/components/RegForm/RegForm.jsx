@@ -30,7 +30,7 @@ const RegForm = ({
       name: '',
       email: '',
       phone: '',
-      position_id: 0,
+      position_id: 1,
       photo: null,
     },
     validationSchema: schemaSignUp,
@@ -161,7 +161,7 @@ const RegForm = ({
           </UploadWrapper>
           <YellowButton
             type="submit"
-            disabled={!(formik.isValid && formik.dirty)}
+            disabled={!(formik.isValid && formik.dirty && fileName)}
             children={'Sign up'}
             style={{ margin: '50px auto 0 auto' }}
           />

@@ -27,20 +27,21 @@ export const schemaSignUp = yup.object().shape({
 
   photo: yup
     .mixed()
-    .notRequired()
+    .nullable(true)
     .test(
       'FILE_SIZE',
       `File too big, can't exceed 5 Mb`,
-      value => !value || (value && value.size <= FILE_SIZE)
+      value => value === null || (value && value.size <= FILE_SIZE)
     )
     .test(
       'photo size',
       'must be min 70X70',
-      value => !value || (value && value.size >= 70 * 70)
+      value => value === null || (value && value.size >= 70 * 70)
     )
     .test(
       'fileType',
       `must be ${SUPPORTED_FORMATS}`,
-      value => !value || (value && SUPPORTED_FORMATS.includes(value.type))
+      value =>
+        value === null || (value && SUPPORTED_FORMATS.includes(value.type))
     ),
 });
